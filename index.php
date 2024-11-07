@@ -12,11 +12,12 @@
     <div class="container-fluid">
         <h1>Listado de editoriais</h1>
 
+        <a href="add_editor.php">Engadir unha editorial</a>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Publisher Id.</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Id.</th>
+                    <th scope="col">Nome</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,21 +26,9 @@
                 require_once 'util.php';
                 $resultados = getAllPublishers();
                 if (is_null($resultados)) {
-                ?>
-
-                    <div class="alert alert-danger" role="alert">
-                        Ha ocurrido un error. No se han podido recupar los editores.
-                    </div>
-
-                <?php } else {
-
-                    foreach ($resultados as $fila) {
-                        //echo "<tr><td>". $fila["publisher_id"]. "</td></tr>";
-                        echo "<tr>
-                    <td> {$fila["publisher_id"]} </td>
-                     <td> {$fila["name"]} </td>
-                    </tr>";
-                    }
+                    showMsg("Ocurriu un erro. Non se puideron recupar os editores.", "alert-danger");
+                } else {
+                    showPublishers($resultados);
                 }
 
 
